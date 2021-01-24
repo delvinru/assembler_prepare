@@ -22,6 +22,9 @@ _start:
 
 procedure:
   pusha
-  
+  or ax, dx 
+  and ax, bx
+  sub cx, ax
+  mov [R], cx
   popa
   ret
