@@ -1,4 +1,4 @@
-; Написать процедуру сортировки по возрастанию массива однобайтных элементов
+; Написать процедуру сортировки по убыванию массива однобайтных элементов
 
 ; Complete
 ; Известный баг: почему-то не хочет работать с числами большими чем 0xF0.
@@ -43,7 +43,7 @@ procedure:
 			mov bh, BYTE [esi+edx]		;arr[j]
 			mov bl, BYTE [esi+edx+1]	;arr[j+1]
 			cmp bh, bl
-			jg swap_elements
+			jl swap_elements
 			jmp skip_swap
 
 			swap_elements:
