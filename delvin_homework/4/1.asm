@@ -12,7 +12,7 @@ _start:
     call input_string
 
     mov edi, string
-    lea ebx, substituion
+    lea ebx, [substituion]
     xor ecx, ecx
 sub_loop:
     cmp BYTE [edi], 0x00
