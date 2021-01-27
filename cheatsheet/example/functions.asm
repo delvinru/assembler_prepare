@@ -101,3 +101,28 @@ get_file_size:
 
     pop ebx
     ret
+
+
+;Аргументы: esi - адрес, куда нужно будет сохранить введеную строку
+;Usage:
+;   mov edi, user_input
+;   call input_str
+;Функция ничего не возвращает
+input_str:
+    pusha
+input_str_loop:
+    mov eax, 3
+    mov ebx, 0
+    mov ecx, edi
+    mov edx, 1
+    int 0x80
+
+    cmp BYTE [edi], 0x0A    ;if user press enter, than end input
+    jz input_str_end
+    inc edi
+    jmp input_str_loop
+
+input_str_end:
+    mov BYTE [edi], 0
+    popa
+    ret

@@ -1,33 +1,35 @@
 %include "functions.asm"
 
 section .data
-    mystring db 'Hello, world',0xA, 0xD, 0
-    for_print_hex db 'edx = 0x', 0
+    input_prompt db 'Введите имя файла: ', 0
     prepare db 'Size of file ', 0
     my_file db 'my_file', 0
     after_prepare db ' = 0x', 0
 
 section .bss    
     statbuf resb 144
+    input_filename resb 128
 
 section .text
     global _start
 
 _start:
-    pop ebx                 ;skip argc
-    pop ebx                 ;skip argv[0]
-    pop ebx
+    mov esi, input_prompt
+    call print_str
+
+    mov edi, input_filename
+    call input_str
 
     mov esi, prepare
     call print_str
 
-    mov esi, ebx
+    mov esi, input_filename
     call print_str
 
     mov esi, after_prepare
     call print_str
 
-    mov esi, ebx
+    mov esi, input_filename
     mov ecx, statbuf
     call get_file_size
 
